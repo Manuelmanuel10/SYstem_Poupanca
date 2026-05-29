@@ -26,6 +26,9 @@
             <a href="{{ route('tenant.membros.index') }}"><i class="fas fa-user me-2"></i>Membros</a>
             <a href="{{ route('tenant.contribuicoes.index') }}"><i class="fas fa-hand-holding-usd me-2"></i>Contribuições</a>
             <a href="{{ route('tenant.emprestimos.index') }}"><i class="fas fa-money-bill-wave me-2"></i>Empréstimos</a>
+            <a href="{{ route('tenant.onboarding.subscricao') }}" class="{{ request()->routeIs('tenant.onboarding.*') ? 'active' : '' }}">
+        <i class="fas fa-crown me-2"></i>Minha Subscrição
+</a>
         </nav>
     </div>
     <div class="main-content w-100">
