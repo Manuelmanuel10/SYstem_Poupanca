@@ -75,4 +75,73 @@
     </div>
 </div>
 @endforelse
+
+<div class="row g-4 mt-2">
+    <div class="col-md-6">
+        <div class="card h-100" style="border-radius:12px;border:none;box-shadow:0 2px 10px rgba(0,0,0,0.08)">
+            <div class="card-body p-4">
+                <div class="text-center mb-3">
+                    <div style="width:60px;height:60px;background:#fce7f3;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto">
+                        <i class="fas fa-chart-line fa-2x" style="color:#9d174d"></i>
+                    </div>
+                    <h5 class="mt-3 fw-bold">Evolução do Grupo</h5>
+                    <p class="text-muted" style="font-size:13px">Tabela mensal de poupança de todos os membros com juros e fundo social</p>
+                </div>
+                <form method="POST" action="{{ route('tenant.relatorios.evolucao.grupo') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-size:13px">Grupo</label>
+                        <select name="grupo_id" class="form-select form-select-sm" required>
+                            <option value="">Seleccione...</option>
+                            @foreach($grupos as $g)
+                            <option value="{{ $g->id }}">{{ $g->nome }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" style="font-size:13px">Ano</label>
+                        <input type="number" name="ano" class="form-control form-control-sm" value="{{ date('Y') }}" min="2020" max="2099" required>
+                    </div>
+                    <button type="submit" class="btn w-100" style="background:#9d174d;color:white">
+                        <i class="fas fa-file-pdf me-2"></i>Gerar PDF do Grupo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100" style="border-radius:12px;border:none;box-shadow:0 2px 10px rgba(0,0,0,0.08)">
+            <div class="card-body p-4">
+                <div class="text-center mb-3">
+                    <div style="width:60px;height:60px;background:#ede9fe;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto">
+                        <i class="fas fa-user-chart fa-2x" style="color:#6d28d9"></i>
+                    </div>
+                    <h5 class="mt-3 fw-bold">Evolução do Membro</h5>
+                    <p class="text-muted" style="font-size:13px">Extracto pessoal com evolução mensal, juros e histórico completo</p>
+                </div>
+                <form method="POST" action="{{ route('tenant.relatorios.evolucao.membro') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-size:13px">Membro</label>
+                        <select name="membro_id" class="form-select form-select-sm" required>
+                            <option value="">Seleccione...</option>
+                            @foreach($grupos as $g)
+                                @foreach($g->membros as $m)
+                                <option value="{{ $m->id }}">{{ $m->nome }} ({{ $g->nome }})</option>
+                                @endforeach
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" style="font-size:13px">Ano</label>
+                        <input type="number" name="ano" class="form-control form-control-sm" value="{{ date('Y') }}" min="2020" max="2099" required>
+                    </div>
+                    <button type="submit" class="btn w-100" style="background:#6d28d9;color:white">
+                        <i class="fas fa-file-pdf me-2"></i>Gerar Extracto Pessoal
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

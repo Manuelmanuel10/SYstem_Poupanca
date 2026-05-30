@@ -14,9 +14,9 @@ return new class extends Migration {
             $table->decimal('valor_devido', 10, 2);
             $table->date('data_emprestimo');
             $table->date('data_vencimento');
-            $table->string('estado')->default('pendente'); // pendente, pago, atrasado
+            $table->string('estado')->default('pendente');
             $table->timestamps();
         });
     }
     public function down(): void { Schema::dropIfExists('emprestimos'); }
-};@Manuelmanuel10 ➜ .../SYstem_Poupanca/app/database/migrations (main) $
+};
